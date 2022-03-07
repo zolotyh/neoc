@@ -1,7 +1,7 @@
 local opt = vim.opt
 local g = vim.g
 local cmd = vim.cmd
-local local_options  = vim.bo
+local local_options = vim.bo
 
 -----------------------------------------------------------
 -- General
@@ -19,7 +19,6 @@ opt.tabstop = 2
 opt.wrap = false -- Disable wrap
 opt.mouse = 'a' -- Enable mouse support
 opt.swapfile = false -- Don't use swapfile
-
 
 -----------------------------------------------------------
 -- Local options
