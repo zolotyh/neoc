@@ -16,5 +16,27 @@ return require('packer').startup(function(use)
 
     -- Language server
     use {'neovim/nvim-lspconfig', config = "require('neoc.plugins.nvim-lspconfig')"}
+    --     use {'onsails/lspkind-nvim'}
+    --     use {'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu'}
+    --     use {'terrortylor/nvim-comment', config = "require('neoc.plugins.nvim-comment')"}
+    -- 
+    --     -- Autocomplete
+    --     use {'hrsh7th/nvim-cmp', config = "require('neoc.plugins.nvim-cmp')"}
+    --     use {'hrsh7th/cmp-nvim-lsp'}
+    --     use {'hrsh7th/cmp-buffer'}
+    --     use {'L3MON4D3/LuaSnip'}
+    --     use {'hrsh7th/cmp-vsnip'}
+    --     use {'hrsh7th/vim-vsnip'}
+    --     use {'hrsh7th/cmp-path'}
+    --     use {'hrsh7th/cmp-calc'}
+    --     use {'hrsh7th/cmp-cmdline'}
+    --     use {'saadparwaiz1/cmp_luasnip'}
+    --     use {'ray-x/cmp-treesitter'}
+    --     use {'lukas-reineke/cmp-rg'}
+    --     use {'quangnguyen30192/cmp-nvim-tags'}
+    --     use {'rafamadriz/friendly-snippets'}
+    -- 
+    --     use {'nvim-telescope/telescope-fzy-native.nvim'}
+    --     use {'nvim-telescope/telescope-project.nvim'}
 
 end)

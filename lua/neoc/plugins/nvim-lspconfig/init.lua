@@ -2,6 +2,7 @@ vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile' -- Auto compile when th
 vim.cmd [[au BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)]]
 
 require'lspconfig'.sumneko_lua.setup {
+    capabilities = capabilities,
     settings = {
         Lua = {
             runtime = {

@@ -1,4 +1,5 @@
 local M = {}
+local default_config = {}
 
 function M.init()
 
