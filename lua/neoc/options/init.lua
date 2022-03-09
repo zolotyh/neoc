@@ -21,7 +21,7 @@ opt.wrap = false -- Disable wrap
 opt.mouse = 'a' -- Enable mouse support
 opt.swapfile = false -- Don't use swapfile
 
-opt.undodir = '~/.vim/undodir'
+opt.undodir = os.getenv( "HOME" ) .. '.vim/undodir'
 opt.undofile = true
 opt.relativenumber = true
 
