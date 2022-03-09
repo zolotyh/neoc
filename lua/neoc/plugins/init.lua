@@ -30,11 +30,12 @@ return require('packer').startup(function(use)
 
     -- Working with git
     use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}, config = "require('neoc.plugins.gitsignsnvim')"}
+    use {'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim'}
+    use {'rhysd/committia.vim'}
 
     -- Add autopairs functionality
     use {'windwp/nvim-autopairs', config = "require('neoc.plugins.nvim-autopairs')"}
 
-    --     use {'onsails/lspkind-nvim'}
     --     use {'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu'}
     --     -- Autocomplete
     --     use {'hrsh7th/nvim-cmp', config = "require('neoc.plugins.nvim-cmp')"}
