@@ -40,6 +40,8 @@ return require('packer').startup(function(use)
     -- Status line setup
     use {'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}, config = "require('neoc.plugins.lualine')"}
 
+    use {'Lenovsky/nuake', config = "require('neoc.plugins.nuake')"}
+
     --     use {'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu'}
     --     -- Autocomplete
     --     use {'hrsh7th/nvim-cmp', config = "require('neoc.plugins.nvim-cmp')"}

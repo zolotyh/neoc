@@ -93,3 +93,4 @@ tags
 
 # Packer config ignore
 plugin/packer_compiled.lua
+.local-history/
