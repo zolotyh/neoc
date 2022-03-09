@@ -10,4 +10,6 @@ return function()
     end
 
     dofile(vim.env.MYVIMRC)
+    vim.api.nvim_command(':PackerSync')
 end
+

@@ -19,6 +19,7 @@ return require('packer').startup(function(use)
     use {'hrsh7th/cmp-nvim-lsp', requires = {{'neovim/nvim-lspconfig'}}, config = "require('neoc.plugins.cmp-nvim-lsp')"} -- LSP source for nvim-cmp
     use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
     use 'L3MON4D3/LuaSnip' -- Snippets plugin
+    use {"folke/trouble.nvim", requires = "kyazdani42/nvim-web-devicons", config = "require('neoc.plugins.troublenvim')"} -- Show LSP errors in one place
 
     -- Special completions plugins
     use {'hrsh7th/cmp-path'} -- path completions
@@ -36,8 +37,13 @@ return require('packer').startup(function(use)
 
     -- Add autopairs functionality
     use {'windwp/nvim-autopairs', config = "require('neoc.plugins.nvim-autopairs')"}
-
     use {'tpope/vim-repeat'}
+    use {'wakatime/vim-wakatime'}
+    use {'pechorin/any-jump.vim'}
+
+    -- Status line setup
+    use {'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}, config = "require('neoc.plugins.lualine')"}
+
     --     use {'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu'}
     --     -- Autocomplete
     --     use {'hrsh7th/nvim-cmp', config = "require('neoc.plugins.nvim-cmp')"}
@@ -54,5 +60,6 @@ return require('packer').startup(function(use)
     --     use {'nvim-telescope/telescope-project.nvim'}
     --
     use {'terrortylor/nvim-comment', config = "require('neoc.plugins.nvim-comment')"}
+    use {'mhinz/vim-startify'}
 
 end)

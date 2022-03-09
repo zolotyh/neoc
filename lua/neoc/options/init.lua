@@ -7,6 +7,7 @@ local local_options = vim.bo
 -- General
 -----------------------------------------------------------
 g.mapleader = ' ' -- Change leader to a space
+g.termguicolors = true -- Set true GUI colors for Console
 cmd('filetype plugin indent on') -- auto indent
 
 opt.autoindent = true
