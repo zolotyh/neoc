@@ -37,6 +37,7 @@ return require('packer').startup(function(use)
     -- Add autopairs functionality
     use {'windwp/nvim-autopairs', config = "require('neoc.plugins.nvim-autopairs')"}
 
+    use {'tpope/vim-repeat'}
     --     use {'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu'}
     --     -- Autocomplete
     --     use {'hrsh7th/nvim-cmp', config = "require('neoc.plugins.nvim-cmp')"}
