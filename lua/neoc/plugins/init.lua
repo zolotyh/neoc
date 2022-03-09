@@ -32,6 +32,7 @@ return require('packer').startup(function(use)
     use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}, config = "require('neoc.plugins.gitsignsnvim')"}
     use {'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim'}
     use {'rhysd/committia.vim'}
+    use {'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim', config = "require('neoc.plugins.neogit')"}
 
     -- Add autopairs functionality
     use {'windwp/nvim-autopairs', config = "require('neoc.plugins.nvim-autopairs')"}
