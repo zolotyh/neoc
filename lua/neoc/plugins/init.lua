@@ -22,7 +22,10 @@ return require('packer').startup(function(use)
     use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
     use 'L3MON4D3/LuaSnip' -- Snippets plugin
 
+    -- Working with git
     use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}, config = "require('neoc.plugins.gitsignsnvim')"}
+
+    -- Add autopairs functionality
     use {'windwp/nvim-autopairs', config = "require('neoc.plugins.nvim-autopairs')"}
 
     --     use {'onsails/lspkind-nvim'}
