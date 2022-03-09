@@ -20,6 +20,14 @@ return require('packer').startup(function(use)
     use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
     use 'L3MON4D3/LuaSnip' -- Snippets plugin
 
+    -- Special completions plugins
+    use {'hrsh7th/cmp-path'} -- path completions
+    use {'hrsh7th/cmp-buffer'} -- completion for words in buffer
+    use {'hrsh7th/cmp-cmdline'} -- complet
+    use {"lukas-reineke/cmp-rg"} -- rip grep completion
+    use {'ray-x/cmp-treesitter'} -- show node types in autocompletion
+    use {'onsails/lspkind-nvim'} -- show pictagrams on autocompletion
+
     -- Working with git
     use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}, config = "require('neoc.plugins.gitsignsnvim')"}
 
@@ -31,15 +39,11 @@ return require('packer').startup(function(use)
     --     -- Autocomplete
     --     use {'hrsh7th/nvim-cmp', config = "require('neoc.plugins.nvim-cmp')"}
     --     use {'hrsh7th/cmp-nvim-lsp'}
-    --     use {'hrsh7th/cmp-buffer'}
     --     use {'L3MON4D3/LuaSnip'}
     --     use {'hrsh7th/cmp-vsnip'}
     --     use {'hrsh7th/vim-vsnip'}
-    --     use {'hrsh7th/cmp-path'}
     --     use {'hrsh7th/cmp-calc'}
-    --     use {'hrsh7th/cmp-cmdline'}
     --     use {'saadparwaiz1/cmp_luasnip'}
-    --     use {'ray-x/cmp-treesitter'}
     --     use {'lukas-reineke/cmp-rg'}
     --     use {'quangnguyen30192/cmp-nvim-tags'}
     --     use {'rafamadriz/friendly-snippets'}

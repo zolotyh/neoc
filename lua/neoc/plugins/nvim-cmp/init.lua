@@ -36,5 +36,5 @@ cmp.setup {
             end
         end
     },
-    sources = {{name = 'nvim_lsp'}, {name = 'luasnip'}}
+    sources = {{name = 'nvim_lsp'}, {name = 'luasnip'}, {name = 'path'}, {name = 'buffer'}, {name = 'treesitter'}, {name = 'rg'}}
 }
