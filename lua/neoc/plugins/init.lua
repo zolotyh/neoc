@@ -11,9 +11,6 @@ return require('packer').startup(function(use)
     -- Theme
     use {'folke/tokyonight.nvim', config = "vim.cmd[[colorscheme tokyonight]]"} -- turn on theme
 
-    -- Treesitter
-    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = "require('neoc.plugins.nvim-treesitter')"}
-
     -- Language server
     use {'hrsh7th/nvim-cmp', config = "require('neoc.plugins.nvim-cmp')"} -- Autocompletion plugin
     use {'hrsh7th/cmp-nvim-lsp', requires = {{'neovim/nvim-lspconfig'}}, config = "require('neoc.plugins.cmp-nvim-lsp')"} -- LSP source for nvim-cmp
@@ -26,7 +23,6 @@ return require('packer').startup(function(use)
     use {'hrsh7th/cmp-buffer'} -- completion for words in buffer
     use {'hrsh7th/cmp-cmdline'} -- complet
     use {"lukas-reineke/cmp-rg"} -- rip grep completion
-    use {'ray-x/cmp-treesitter'} -- show node types in autocompletion
     use {'onsails/lspkind-nvim'} -- show pictagrams on autocompletion
 
     -- Working with git
@@ -59,7 +55,22 @@ return require('packer').startup(function(use)
     --     use {'nvim-telescope/telescope-fzy-native.nvim'}
     --     use {'nvim-telescope/telescope-project.nvim'}
     --
+    use 'ygm2/rooter.nvim'
+
     use {'terrortylor/nvim-comment', config = "require('neoc.plugins.nvim-comment')"}
+
     use {'mhinz/vim-startify'}
+    use {
+        'windwp/nvim-ts-autotag',
+        config = "require('neoc.plugins.nvim-ts-autotag')",
+        after = "nvim-treesitter",
+        ft = {'html', 'tsx', 'vue', 'svelte', 'php'}
+    }
+
+    -- Treesitter
+    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = "require('neoc.plugins.nvim-treesitter')"}
+    use {'ray-x/cmp-treesitter'} -- show node types in autocompletion
+    use {'theHamsta/nvim-treesitter-pairs', after = "nvim-treesitter"}
+    use {'nvim-treesitter/nvim-treesitter-refactor', after = "nvim-treesitter"}
 
 end)

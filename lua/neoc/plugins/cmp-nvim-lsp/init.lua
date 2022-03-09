@@ -36,6 +36,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local lspconfig = require('lspconfig')
+local configs = require 'lspconfig.configs'
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 local servers = {'tsserver'}
@@ -48,7 +49,7 @@ for _, lsp in ipairs(servers) do
     }
 end
 
-require'lspconfig'.sumneko_lua.setup {
+lspconfig.sumneko_lua.setup {
     capabilities = capabilities,
     settings = {
         Lua = {
@@ -70,7 +71,7 @@ require'lspconfig'.sumneko_lua.setup {
     }
 }
 
-require"lspconfig".efm.setup {
+lspconfig.efm.setup {
     init_options = {documentFormatting = true},
     filetypes = {"lua"},
     settings = {
@@ -85,3 +86,21 @@ require"lspconfig".efm.setup {
         }
     }
 }
+
+if not configs.ls_emmet then
+    configs.ls_emmet = {
+        default_config = {
+            cmd = {'ls_emmet', '--stdio'},
+            filetypes = {
+                'html', 'css', 'scss', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'haml', 'xml', 'xsl', 'pug', 'slim', 'sass',
+                'stylus', 'less', 'sss', 'hbs', 'handlebars'
+            },
+            root_dir = function(_)
+                return vim.loop.cwd()
+            end,
+            settings = {}
+        }
+    }
+end
+
+lspconfig.ls_emmet.setup {capabilities = capabilities}
