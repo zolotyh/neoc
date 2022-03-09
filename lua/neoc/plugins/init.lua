@@ -22,6 +22,8 @@ return require('packer').startup(function(use)
     use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
     use 'L3MON4D3/LuaSnip' -- Snippets plugin
 
+    use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}, config = "require('neoc.plugins.gitsignsnvim')"}
+
     --     use {'onsails/lspkind-nvim'}
     --     use {'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu'}
     --     use {'terrortylor/nvim-comment', config = "require('neoc.plugins.nvim-comment')"}
