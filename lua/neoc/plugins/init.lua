@@ -77,5 +77,6 @@ return require('packer').startup(function(use)
 
     use {'goolord/alpha-nvim', requires = 'kyazdani42/nvim-web-devicons', config = "require('neoc.plugins.alpha-nvim')"}
     use 'dinhhuy258/vim-local-history'
+    use {'phaazon/hop.nvim', config = "require('neoc/plugins/hopvim')"}
 
 end)
