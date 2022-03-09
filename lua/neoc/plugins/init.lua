@@ -26,7 +26,6 @@ return require('packer').startup(function(use)
 
     --     use {'onsails/lspkind-nvim'}
     --     use {'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu'}
-    --     use {'terrortylor/nvim-comment', config = "require('neoc.plugins.nvim-comment')"}
     --     -- Autocomplete
     --     use {'hrsh7th/nvim-cmp', config = "require('neoc.plugins.nvim-cmp')"}
     --     use {'hrsh7th/cmp-nvim-lsp'}
@@ -44,5 +43,7 @@ return require('packer').startup(function(use)
     --     use {'rafamadriz/friendly-snippets'}
     --     use {'nvim-telescope/telescope-fzy-native.nvim'}
     --     use {'nvim-telescope/telescope-project.nvim'}
+    --
+    use {'terrortylor/nvim-comment', config = "require('neoc.plugins.nvim-comment')"}
 
 end)
