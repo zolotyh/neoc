@@ -23,6 +23,7 @@ return require('packer').startup(function(use)
     use 'L3MON4D3/LuaSnip' -- Snippets plugin
 
     use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}, config = "require('neoc.plugins.gitsignsnvim')"}
+    use {'windwp/nvim-autopairs', config = "require('neoc.plugins.nvim-autopairs')"}
 
     --     use {'onsails/lspkind-nvim'}
     --     use {'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu'}
