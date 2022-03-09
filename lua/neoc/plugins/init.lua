@@ -59,7 +59,7 @@ return require('packer').startup(function(use)
 
     use {'terrortylor/nvim-comment', config = "require('neoc.plugins.nvim-comment')"}
 
-    use {'mhinz/vim-startify'}
+    -- use {'mhinz/vim-startify'}
     use {
         'windwp/nvim-ts-autotag',
         config = "require('neoc.plugins.nvim-ts-autotag')",
@@ -72,5 +72,8 @@ return require('packer').startup(function(use)
     use {'ray-x/cmp-treesitter'} -- show node types in autocompletion
     use {'theHamsta/nvim-treesitter-pairs', after = "nvim-treesitter"}
     use {'nvim-treesitter/nvim-treesitter-refactor', after = "nvim-treesitter"}
+
+    use {'goolord/alpha-nvim', requires = 'kyazdani42/nvim-web-devicons', config = "require('neoc.plugins.alpha-nvim')"}
+    use 'dinhhuy258/vim-local-history'
 
 end)
