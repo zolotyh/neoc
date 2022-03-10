@@ -42,21 +42,6 @@ return require('packer').startup(function(use)
 
     use {'Lenovsky/nuake', config = "require('neoc.plugins.nuake')"}
 
-    --     use {'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu'}
-    --     -- Autocomplete
-    --     use {'hrsh7th/nvim-cmp', config = "require('neoc.plugins.nvim-cmp')"}
-    --     use {'hrsh7th/cmp-nvim-lsp'}
-    --     use {'L3MON4D3/LuaSnip'}
-    --     use {'hrsh7th/cmp-vsnip'}
-    --     use {'hrsh7th/vim-vsnip'}
-    --     use {'hrsh7th/cmp-calc'}
-    --     use {'saadparwaiz1/cmp_luasnip'}
-    --     use {'lukas-reineke/cmp-rg'}
-    --     use {'quangnguyen30192/cmp-nvim-tags'}
-    --     use {'rafamadriz/friendly-snippets'}
-    --     use {'nvim-telescope/telescope-fzy-native.nvim'}
-    --     use {'nvim-telescope/telescope-project.nvim'}
-    --
     use 'ygm2/rooter.nvim'
 
     use {'terrortylor/nvim-comment', config = "require('neoc.plugins.nvim-comment')"}
@@ -76,7 +61,7 @@ return require('packer').startup(function(use)
     use {'nvim-treesitter/nvim-treesitter-refactor', after = "nvim-treesitter"}
 
     use {'goolord/alpha-nvim', requires = 'kyazdani42/nvim-web-devicons', config = "require('neoc.plugins.alpha-nvim')"}
-    use 'dinhhuy258/vim-local-history'
+    use {'dinhhuy258/vim-local-history', config="require(neoc.plugins/vim-local-history)"}
     use {'phaazon/hop.nvim', config = "require('neoc/plugins/hopvim')"}
 
 end)
