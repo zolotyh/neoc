@@ -13,8 +13,8 @@ return require('packer').startup(function(use)
 
   -- Language server
   use {'hrsh7th/nvim-cmp', config = "require('neoc.plugins.nvim-cmp')"} -- Autocompletion plugin
-  use {'hrsh7th/cmp-nvim-lsp', requires = {{'neovim/nvim-lspconfig'}}, config = "require('neoc.plugins.cmp-nvim-lsp')"} -- LSP source for nvim-cmp
-  use {'williamboman/nvim-lsp-installer', require = {{'neovim/nvim-lspconfig'}}, config = "require('neoc.plugins.nvim-lsp-installer')"} -- LSP source for nvim-cmp
+  use {'hrsh7th/cmp-nvim-lsp', requires = 'neovim/nvim-lspconfig', config = "require('neoc.plugins.cmp-nvim-lsp')"} -- LSP source for nvim-cmp
+  use {'williamboman/nvim-lsp-installer', require = 'neovim/nvim-lspconfig', config = "require('neoc.plugins.nvim-lsp-installer')"} -- LSP source for nvim-cmp
   use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
   use {"folke/trouble.nvim", requires = "kyazdani42/nvim-web-devicons", config = "require('neoc.plugins.troublenvim')"} -- Show LSP errors in one place
@@ -64,5 +64,7 @@ return require('packer').startup(function(use)
   use {'goolord/alpha-nvim', requires = 'kyazdani42/nvim-web-devicons', config = "require('neoc.plugins.alpha-nvim')"}
   use {'dinhhuy258/vim-local-history', config = "require('neoc.plugins.vim-local-history')"}
   use {'phaazon/hop.nvim', config = "require('neoc/plugins/hopvim')"}
+
+  use 'editorconfig/editorconfig-vim'
 
 end)
