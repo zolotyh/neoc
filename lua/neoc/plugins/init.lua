@@ -14,9 +14,9 @@ return require('packer').startup(function(use)
   -- Language server
   use {'hrsh7th/nvim-cmp', config = "require('neoc.plugins.nvim-cmp')"} -- Autocompletion plugin
   use {'hrsh7th/cmp-nvim-lsp', requires = 'neovim/nvim-lspconfig', config = "require('neoc.plugins.cmp-nvim-lsp')"} -- LSP source for nvim-cmp
-  use {'williamboman/nvim-lsp-installer', require = 'neovim/nvim-lspconfig', config = "require('neoc.plugins.nvim-lsp-installer')"} -- LSP source for nvim-cmp
-  use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
-  use 'L3MON4D3/LuaSnip' -- Snippets plugin
+  use {'williamboman/nvim-lsp-installer', config = "require('neoc.plugins.nvim-lsp-installer')"} -- LSP source for nvim-cmp
+  use {'saadparwaiz1/cmp_luasnip'}
+  use {'L3MON4D3/LuaSnip', config = "require('neoc.plugins.lua-snip')"}
   use {"folke/trouble.nvim", requires = "kyazdani42/nvim-web-devicons", config = "require('neoc.plugins.troublenvim')"} -- Show LSP errors in one place
 
   -- Special completions plugins
@@ -47,7 +47,6 @@ return require('packer').startup(function(use)
 
   use {'terrortylor/nvim-comment', config = "require('neoc.plugins.nvim-comment')"}
 
-  -- use {'mhinz/vim-startify'}
   use {
     'windwp/nvim-ts-autotag',
     config = "require('neoc.plugins.nvim-ts-autotag')",
@@ -65,6 +64,7 @@ return require('packer').startup(function(use)
   use {'dinhhuy258/vim-local-history', config = "require('neoc.plugins.vim-local-history')"}
   use {'phaazon/hop.nvim', config = "require('neoc/plugins/hopvim')"}
 
+  use 'tpope/vim-surround'
   use 'editorconfig/editorconfig-vim'
 
 end)

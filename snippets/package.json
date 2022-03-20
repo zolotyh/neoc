@@ -1,0 +1,23 @@
+{
+  "name": "nvim-snippets",
+  "author": "zolotyh",
+  "engines": {
+    "vscode": "^1.11.0"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": "lua",
+        "path": "./lua.json"
+      },
+      {
+        "language": [
+          "shellscript",
+          "shell",
+          "sh"
+        ],
+        "path": "./shell.json"
+      }
+    ]
+  }
+}
