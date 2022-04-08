@@ -10,6 +10,11 @@ local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 require'nvim-tree'.setup {
   hijack_cursor = true,
   actions = {open_file = {quit_on_open = true}},
+  git = {
+    enable = false,
+    ignore = false,
+    timeout = 400,
+  },
   view = {
     width = 100,
     height = 100,
@@ -23,7 +28,7 @@ require'nvim-tree'.setup {
       list = {
         {key = "<BS>", cb = tree_cb("close")} -- tree_cb and the cb property are deprecated
       }
-    }
+    },
   }
 }
 
