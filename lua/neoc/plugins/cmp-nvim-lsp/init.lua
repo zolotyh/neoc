@@ -145,16 +145,12 @@ local configs = require("lspconfig.configs")
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 local servers = {
-    "tsserver",
-    "eslint",
-    "null-ls",
     "bashls",
-    "denols",
-    "eslint",
-    "jsonls",
-    "null-ls",
     "pyright",
+    "emmet_ls",
     "sumneko_lua",
+    "ltex",
+    "eslint",
 }
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup({
@@ -174,9 +170,9 @@ lspconfig.tsserver.setup({
     on_attach = function(client, bufnr)
         client.resolved_capabilities.document_formatting = false
         client.resolved_capabilities.document_range_formatting = false
-        local ts_utils = require("nvim-lsp-ts-utils")
-        ts_utils.setup({})
-        ts_utils.setup_client(client)
+        -- local ts_utils = require("nvim-lsp-ts-utils")
+        -- ts_utils.setup({})
+        -- ts_utils.setup_client(client)
         buf_map(bufnr, "n", "gs", ":TSLspOrganize<CR>")
         buf_map(bufnr, "n", "gi", ":TSLspRenameFile<CR>")
         buf_map(bufnr, "n", "go", ":TSLspImportAll<CR>")
