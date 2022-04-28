@@ -25,6 +25,10 @@ opt.undodir = os.getenv("HOME") .. '/.vim/undodir'
 opt.undofile = true
 opt.relativenumber = true
 
+
+
+
+
 -----------------------------------------------------------
 -- Local options
 -----------------------------------------------------------
@@ -32,3 +36,5 @@ local_options.autoindent = true
 local_options.expandtab = true
 local_options.shiftwidth = 2
 local_options.tabstop = 2
+local_options.makeprg='eslint_d --format unix --ext .ts,.tsx src/'
+local_options.errorformat='%f:%l:%c: %m,%-G%.%#'

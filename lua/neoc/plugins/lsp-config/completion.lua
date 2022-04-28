@@ -55,5 +55,8 @@ cmp.setup({
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
 		{ name = "neorg" },
+    { name = "path"},
+    { name = "cmdline"},
+    { name = "buffer"},
 	},
 })
