@@ -173,3 +173,21 @@ lspconfig.efm.setup({
         "typescriptreact",
     },
 })
+
+   local configs = require 'lspconfig.configs'
+
+   -- Check if the config is already defined (useful when reloading this file)
+   if not configs.foo_lsp then
+     configs.foo_lsp = {
+       default_config = {
+          cmd = {'java -jar /Users/Aleksei_Zolotykh/.config/lsp/als-server.jar --systemStream'};
+         filetypes = {'yaml'};
+         root_dir = function(fname)
+           return lspconfig.util.find_git_ancestor(fname)
+         end;
+         settings = {};
+       };
+     }
+   end
+
+lspconfig.foo_lsp.setup{}
