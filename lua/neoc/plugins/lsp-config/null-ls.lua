@@ -1,20 +1,10 @@
-local null_ls = require("null-ls")
-
-local formatting = null_ls.builtins.formatting
-
-local sources = {
-  formatting.eslint_d.with({
-    filetypes = {
-      filetypes = {
-        "typescript", "javascript", "typescript.tsx", "javascript.jsx",
-        "typescriptreact", "javascriptreact", "vue"
-      }
-    }
-  }),
-  formatting.autopep8,
-  formatting.stylua,
-  formatting.clang_format,
-  formatting.lua_format
-}
-
-null_ls.setup({ sources = sources })
+require("null-ls").setup({
+    sources = {
+        require("null-ls").builtins.formatting.stylua,
+        require("null-ls").builtins.diagnostics.eslint_d,
+        require("null-ls").builtins.code_actions.eslint_d,
+        require("null-ls").builtins.formatting.eslint_d,
+        require("null-ls").builtins.completion.spell,
+        require("null-ls").builtins.code_actions.refactoring,
+    },
+})
