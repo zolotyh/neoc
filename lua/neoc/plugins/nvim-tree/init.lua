@@ -1,9 +1,10 @@
-vim.g.nvim_tree_indent_markers = true
+-- vim.g.nvim_tree_indent_markers = true
 vim.g.nvim_tree_highlight_opened_files = true
 vim.g.nvim_tree_git_hl = true
 vim.g.nvim_tree_special_files = {'README.md', 'Makefile', 'MAKEFILE', 'package.json'}
 
-vim.api.nvim_set_keymap('n', '<BS>', ':NvimTreeToggle<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<BS>', ':NvimTreeFindFileToggle<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<Leader>o', ':NvimTreeToggle<CR>', {noremap = true, silent = true})
 
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 

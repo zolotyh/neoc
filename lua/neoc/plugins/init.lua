@@ -121,16 +121,6 @@ return require("packer").startup(function(use)
 
   use("gennaro-tedesco/nvim-jqx")
 
-  use({
-    "nanozuki/tabby.nvim",
-    config = function()
-      require("tabby").setup({
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      })
-    end,
-  })
 
   use({
     "folke/which-key.nvim",
@@ -142,6 +132,14 @@ return require("packer").startup(function(use)
       })
     end,
   })
+
+  use {
+    "brymer-meneses/grammar-guard.nvim",
+    requires = {
+        "neovim/nvim-lspconfig",
+        "williamboman/nvim-lsp-installer"
+    }
+}
 
   
 
