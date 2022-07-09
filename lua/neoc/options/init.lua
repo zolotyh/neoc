@@ -20,13 +20,20 @@ opt.tabstop = 2
 opt.wrap = false -- Disable wrap
 opt.mouse = 'a' -- Enable mouse support
 opt.swapfile = false -- Don't use swapfile
+opt.gdefault = true -- Use global substitude
+opt.vb = true -- Use global substitude
 
 opt.undodir = os.getenv("HOME") .. '/.vim/undodir'
 opt.undofile = true
 opt.relativenumber = true
+opt.foldlevelstart=2
+opt.foldnestmax=2
 
-
-
+-----------------------------------------------------------
+-- Fold
+-----------------------------------------------------------
+opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+opt.foldcolumn = '1'
 
 
 -----------------------------------------------------------

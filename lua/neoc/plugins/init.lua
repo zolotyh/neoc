@@ -61,8 +61,7 @@ return require("packer").startup(function(use)
   })
 
   -- Add autopairs functionality
-  use({
-    "windwp/nvim-autopairs",
+  use({ "windwp/nvim-autopairs",
     config = "require('neoc.plugins.nvim-autopairs')",
   })
   use({ "tpope/vim-repeat" })
@@ -87,7 +86,7 @@ return require("packer").startup(function(use)
 
   use({
     "windwp/nvim-ts-autotag",
-    config = "require('neoc.plugins.nvim-ts-autotag')",
+    -- config = "require('neoc.plugins.nvim-ts-autotag')",
     after = "nvim-treesitter",
     ft = { "html", "tsx", "vue", "svelte", "php" },
   })
@@ -121,6 +120,14 @@ return require("packer").startup(function(use)
 
   use("gennaro-tedesco/nvim-jqx")
 
+  use {
+    'kevinhwang91/nvim-ufo',
+    requires = 'kevinhwang91/promise-async',
+
+    config = function()
+      require('ufo').setup()
+      end
+  }
 
   use({
     "folke/which-key.nvim",
@@ -140,6 +147,8 @@ return require("packer").startup(function(use)
         "williamboman/nvim-lsp-installer"
     }
 }
+
+
 
   
 
