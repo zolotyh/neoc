@@ -120,12 +120,13 @@ return require("packer").startup(function(use)
 
   use("gennaro-tedesco/nvim-jqx")
 
+  use("ziglang/zig.vim")
+
   use {
     'kevinhwang91/nvim-ufo',
     requires = 'kevinhwang91/promise-async',
 
-    config = function()
-      require('ufo').setup()
+    config = function() require('ufo').setup()
       end
   }
 
@@ -147,10 +148,6 @@ return require("packer").startup(function(use)
         "williamboman/nvim-lsp-installer"
     }
 }
-
-
-
-  
 
   -- use("neomake/neomake")
 end)
