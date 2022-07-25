@@ -17,9 +17,17 @@ return require("packer").startup(function(use)
   })
 
   -- Theme
+  -- use({
+  --   "folke/tokyonight.nvim",
+  --   config = "vim.cmd[[colorscheme tokyonight]]; vim.o.background = 'light'",
+  -- }) -- turn on theme
+  --
   use({
-    "folke/tokyonight.nvim",
-    config = "vim.cmd[[colorscheme tokyonight]]",
+    "wuelnerdotexe/vim-enfocado",
+    config = function()
+      vim.cmd[[colorscheme enfocado]];
+      vim.o.background = "light"
+    end
   }) -- turn on theme
 
   -- Language servers config
@@ -147,7 +155,8 @@ return require("packer").startup(function(use)
         "neovim/nvim-lspconfig",
         "williamboman/nvim-lsp-installer"
     }
-}
+  }
 
-  -- use("neomake/neomake")
+  use("rust-lang/rust.vim")
+
 end)

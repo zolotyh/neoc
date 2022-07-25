@@ -1,7 +1,7 @@
 -- vim.g.nvim_tree_indent_markers = true
-vim.g.nvim_tree_highlight_opened_files = true
-vim.g.nvim_tree_git_hl = true
-vim.g.nvim_tree_special_files = {'README.md', 'Makefile', 'MAKEFILE', 'package.json'}
+-- vim.g.nvim_tree_highlight_opened_files = true
+-- vim.g.nvim_tree_git_hl = true
+-- vim.g.nvim_tree_special_files = {'README.md', 'Makefile', 'MAKEFILE', 'package.json'}
 
 vim.api.nvim_set_keymap('n', '<BS>', ':NvimTreeFindFileToggle<CR>', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<Leader>o', ':NvimTreeToggle<CR>', {noremap = true, silent = true})
@@ -20,7 +20,6 @@ require'nvim-tree'.setup {
     width = 100,
     height = 100,
     side = 'right',
-    auto_resize = false,
     mappings = {
       -- custom only false will merge the list with the default mappings
       -- if true, it will only use your list to set the mappings

@@ -26,7 +26,7 @@ opt.vb = true -- Use global substitude
 opt.undodir = os.getenv("HOME") .. '/.vim/undodir'
 opt.undofile = true
 opt.relativenumber = true
-opt.foldlevelstart=2
+opt.foldlevelstart=99
 opt.foldnestmax=2
 
 -----------------------------------------------------------
