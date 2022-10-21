@@ -149,6 +149,11 @@ return require("packer").startup(function(use)
         "williamboman/nvim-lsp-installer"
     }
 }
+  use({
+    "ray-x/sad.nvim",
+    requires = { { "ray-x/guihua.lua" } },
+    config = "require('neoc.plugins.sad')",
+  })
 
   -- use("neomake/neomake")
 end)

@@ -1,0 +1,1 @@
+require'sad'.setup()
