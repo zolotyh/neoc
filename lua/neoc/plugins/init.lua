@@ -54,6 +54,7 @@ return require("packer").startup(function(use)
   })
   use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
   use({ "rhysd/committia.vim" })
+  use({ "f-person/git-blame.nvim"})
   use({
     "TimUntersberger/neogit",
     requires = "nvim-lua/plenary.nvim",
