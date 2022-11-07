@@ -3,11 +3,14 @@ return require("packer").startup(function(use)
   use("wbthomason/packer.nvim")
 
   -- File manager
-  use({
-    "kyazdani42/nvim-tree.lua",
-    requires = "kyazdani42/nvim-web-devicons",
+  use {
+    'nvim-tree/nvim-tree.lua',
+    requires = {
+      'nvim-tree/nvim-web-devicons', -- optional, for file icons
+    },
     config = "require('neoc.plugins.nvim-tree')",
-  })
+    tag = 'nightly' -- optional, updated every week. (see issue #1193)
+  }
 
   -- Works with files
   use({
@@ -16,11 +19,11 @@ return require("packer").startup(function(use)
     config = "require('neoc.plugins.nvim-telescope')",
   })
 
-  -- Theme
-  use({
-    "folke/tokyonight.nvim",
-    config = "vim.cmd[[colorscheme tokyonight]]",
-  }) -- turn on theme
+  -- -- Theme
+  -- use({
+  --   "folke/tokyonight.nvim",
+  --   config = "vim.cmd[[colorscheme tokyonight]]",
+  -- }) -- turn on theme
 
   -- Language servers config
   use {
@@ -169,8 +172,11 @@ return require("packer").startup(function(use)
   use 'jsgv/codeql.nvim'
 
   use({
-    "shaunsingh/solarized.nvim",
-    config = "vim.cmd[[colorscheme solarized]]",
+    "ellisonleao/gruvbox.nvim",
+    config = function ()
+      vim.o.background = 'light'
+      vim.cmd[[colorscheme gruvbox]]
+    end
   }) -- turn on theme
 
 

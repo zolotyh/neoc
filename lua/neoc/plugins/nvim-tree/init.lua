@@ -11,7 +11,10 @@ require'nvim-tree'.setup {
     indent_width = 2,
     indent_markers = {
       enable = true
-    }
+    },
+    icons = {
+      padding = "  ",
+    },
   },
   git = {
     enable = true,
