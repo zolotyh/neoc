@@ -1,284 +1,167 @@
-local lspinstaller = require("nvim-lsp-installer")
-local lspconfig = require("lspconfig")
+require("mason").setup()
 
-lspinstaller.setup({
-    ensure_installed = {
-        "tsserver",
-        "emmet_ls",
-        "eslint_d",
-    },
-    automatic_installation = { exclude = { "sumneko_lua" } },
+local null_ls = require("null-ls")
+
+
+require("mason-null-ls").setup({
+  ensure_installed = {
+    'jq', 'stylua', 'codespell'
+  },
+  automatic_setup = true,
+  automatic_installation = true,
 })
 
-local function on_attach(_, bufnr)
-    local function buf_set_keymap(...)
-        vim.api.nvim_buf_set_keymap(bufnr, ...)
+require 'mason-null-ls'.setup_handlers {
+    function(source_name, methods)
+      -- all sources with no handler get passed here
+      -- Keep original functionality of `automatic_setup = true`
+      require('mason-null-ls.automatic_setup')(source_name, methods)
+    end,
+    stylua = function()
+      null_ls.register(null_ls.builtins.formatting.stylua)
+    end,
+    codespell = function()
+      null_ls.register(null_ls.builtins.diagnostics.codespell)
+    end,
+    jq = function()
+      null_ls.register(null_ls.builtins.formatting.jq)
     end
+}
 
-    local opts = { noremap=true, silent=true }
+null_ls.setup()
 
-    buf_set_keymap("n", "gd", ":lua vim.lsp.buf.definition()<CR>", opts) --> jumps to the definition of the symbol under the cursor
-    buf_set_keymap("n", "<leader>lh", ":lua vim.lsp.buf.hover()<CR>", opts) --> information about the symbol under the cursos in a floating window
-    buf_set_keymap("n", "gi", ":lua vim.lsp.buf.implementation()<CR>", opts) --> lists all the implementations for the symbol under the cursor in the quickfix window
 
-    buf_set_keymap("n", "<leader>rn", "<cmd>Lspsaga rename<cr>", opts) --> rename using Lspsaga
+local lspconfig = require("mason-lspconfig");
 
-    buf_set_keymap(
-        "n",
-        "<leader>ac",
-        "<cmd>lua require('lspsaga.codeaction').code_action()<CR>",
-        opts
-    ) --> selects a code action available at the current cursor position
+lspconfig.setup({
+  ensure_installed = {
+    "tsserver",
+  },
+}
+)
 
-    buf_set_keymap(
-        "v",
-        "<leader>ac",
-        ":<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>",
-        opts
-    ) --> selects a code action available at the current cursor position
-    buf_set_keymap("n", "gr", ":lua vim.lsp.buf.references()<CR>", opts) --> lists all the references to the symbl under the cursor in the quickfix window
-    buf_set_keymap(
-        "n",
-        "<leader>d",
-        ":lua vim.diagnostic.open_float()<CR>",
-        opts
-    )
-    buf_set_keymap("n", "[d", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
-    buf_set_keymap("n", "]d", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
-    buf_set_keymap(
-        "n",
-        "<leader>lq",
-        ":lua vim.diagnostic.setloclist()<CR>",
-        opts
-    )
-    buf_set_keymap("n", "<leader>ff", ":lua vim.lsp.buf.formatting()<CR>", opts) --> formats the current buffer
-    buf_set_keymap("n", "K", "<cmd>Lspsaga hover_doc<cr>", opts)
-    buf_set_keymap(
-        "n",
-        "<C-u>",
-        "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1, '<c-u>')<cr>",
-        {}
-    )
-    buf_set_keymap(
-        "n",
-        "<C-d>",
-        "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1, '<c-d>')<cr>",
-        {}
-    )
 
-end
-
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-for _, server in ipairs(lspinstaller.get_installed_servers()) do
-    lspconfig[server.name].setup({
-        on_attach = on_attach,
-        flags = {
-            debounce_text_changes = 150,
-        },
-
-        capabilities = require("cmp_nvim_lsp").update_capabilities(
-            capabilities
-        ),
+local lsp_formatting = function(bufnr)
+    vim.lsp.buf.format({
+        filter = function(client)
+            -- apply whatever logic you want (in this example, we'll only use null-ls)
+            return client.name == "null-ls"
+        end,
+        bufnr = bufnr,
     })
 end
 
-lspconfig.sumneko_lua.setup({
-    on_attach = on_attach,
 
-    flags = {
+-- if you want to set up formatting on save, you can use this as a callback
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
+
+
+
+local function on_attach(client, bufnr)
+  if client.supports_method("textDocument/formatting") then
+        vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            group = augroup,
+            buffer = bufnr,
+            callback = function()
+                lsp_formatting(bufnr)
+            end,
+        })
+    end
+  local function buf_set_keymap(...)
+    vim.api.nvim_buf_set_keymap(bufnr, ...)
+  end
+
+  local opts = { noremap = true, silent = true }
+
+  buf_set_keymap("n", "gd", ":lua vim.lsp.buf.definition()<CR>", opts) --> jumps to the definition of the symbol under the cursor
+  buf_set_keymap("n", "<leader>lh", ":lua vim.lsp.buf.hover()<CR>", opts) --> information about the symbol under the cursos in a floating window
+  buf_set_keymap("n", "gi", ":lua vim.lsp.buf.implementation()<CR>", opts) --> lists all the implementations for the symbol under the cursor in the quickfix window
+
+  buf_set_keymap("n", "<leader>rn", "<cmd>Lspsaga rename<cr>", opts) --> rename using Lspsaga
+
+  buf_set_keymap(
+    "n",
+    "<leader>ac",
+    "<cmd>lua require('lspsaga.codeaction').code_action()<CR>",
+    opts
+  ) --> selects a code action available at the current cursor position
+
+  buf_set_keymap(
+    "v",
+    "<leader>ac",
+    ":<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>",
+    opts
+  ) --> selects a code action available at the current cursor position
+  buf_set_keymap("n", "gr", ":lua vim.lsp.buf.references()<CR>", opts) --> lists all the references to the symbl under the cursor in the quickfix window
+  buf_set_keymap(
+    "n",
+    "<leader>d",
+    ":lua vim.diagnostic.open_float()<CR>",
+    opts
+  )
+  buf_set_keymap("n", "[d", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
+  buf_set_keymap("n", "]d", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
+  buf_set_keymap(
+    "n",
+    "<leader>lq",
+    ":lua vim.diagnostic.setloclist()<CR>",
+    opts
+  )
+  buf_set_keymap("n", "<leader>ff", ":lua vim.lsp.buf.format { async = true }<CR>", opts) --> formats the current buffer
+  buf_set_keymap("n", "K", "<cmd>Lspsaga hover_doc<cr>", opts)
+  buf_set_keymap(
+    "n",
+    "<C-u>",
+    "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1, '<c-u>')<cr>",
+    {}
+  )
+  buf_set_keymap(
+    "n",
+    "<C-d>",
+    "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1, '<c-d>')<cr>",
+    {}
+  )
+
+end
+
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+lspconfig.setup_handlers {
+  function(server_name) -- default handler (optional)
+    require("lspconfig")[server_name].setup {
+      on_attach = on_attach,
+      flags = {
         debounce_text_changes = 150,
-    },
+      },
 
-    capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities),
+      capabilities = capabilities,
+    }
+  end,
+  ["eslint"] = function()
+    require("lspconfig")["eslint"].setup {
+      filetype = {
+        "typescript",
+        "javascript"
+      }
+    }
+  end,
+  ["sumneko_lua"] = function()
+    require("lspconfig")["sumneko_lua"].setup {
       settings = {
         Lua = {
-            diagnostics = {
-                globals = {
-                    "hs",
-                    "vim",
-                    "it",
-                    "describe",
-                    "before_each",
-                    "after_each",
-                },
-            },
-        },
-    },
-})
-
--- local lsp_installer = require("nvim-lsp-installer")
--- local lspconfig = require("lspconfig")
--- local opts = { noremap = true, silent = true }
---
--- local on_attach = function(client, bufnr)
---     local function buf_set_keymap(...)
---         vim.api.nvim_buf_set_keymap(bufnr, ...)
---     end
---     local function buf_set_option(...)
---         vim.api.nvim_buf_set_option(bufnr, ...)
---     end
---
---     echo('test');
---
---     buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
---
--- -
---     buf_set_keymap("n", "gd", ":lua vim.lsp.buf.definition()<CR>", opts) --> jumps to the definition of the symbol under the cursor
---     buf_set_keymap("n", "<leader>lh", ":lua vim.lsp.buf.hover()<CR>", opts) --> information about the symbol under the cursos in a floating window
---     buf_set_keymap("n", "gi", ":lua vim.lsp.buf.implementation()<CR>", opts) --> lists all the implementations for the symbol under the cursor in the quickfix window
---
---     buf_set_keymap("n", "<leader>rn", "<cmd>Lspsaga rename<cr>", opts) --> rename using Lspsaga
---
---     buf_set_keymap(
---         "n",
---         "<leader>ac",
---         "<cmd>lua require('lspsaga.codeaction').code_action()<CR>",
---         opts
---     ) --> selects a code action available at the current cursor position
---
---     buf_set_keymap(
---         "v",
---         "<leader>ac",
---         ":<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>",
---         opts
---     ) --> selects a code action available at the current cursor position
---     buf_set_keymap("n", "gr", ":lua vim.lsp.buf.references()<CR>", opts) --> lists all the references to the symbl under the cursor in the quickfix window
---     buf_set_keymap(
---         "n",
---         "<leader>d",
---         ":lua vim.diagnostic.open_float()<CR>",
---         opts
---     )
---     buf_set_keymap("n", "[d", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
---     buf_set_keymap("n", "]d", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
---     buf_set_keymap(
---         "n",
---         "<leader>lq",
---         ":lua vim.diagnostic.setloclist()<CR>",
---         opts
---     )
---     vim.api.nvim_set_keymap("n", "<leader>ff", ":lua vim.lsp.buf.formatting()<CR>", opts) --> formats the current buffer
---     vim.api.nvim_set_keymap("v", "<leader>ff", ":lua vim.lsp.buf.range_formatting()()<CR>", opts) --> formats the current buffer
---     buf_set_keymap("n", "K", "<cmd>Lspsaga hover_doc<cr>", opts)
---     buf_set_keymap(
---         "n",
---         "<C-u>",
---         "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1, '<c-u>')<cr>",
---         {}
---     )
---     vim.api.nvim_set_keymap(
---         "n",
---         "<C-d>",
---         "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1, '<c-d>')<cr>",
---         {}
---     )
--- end
---
--- local servers = {
---     "bashls",
---     "pyright",
---     "tsserver",
---     "emmet_ls",
---     "sumneko_lua",
---     "ltex",
---     "null-ls",
---     -- "eslint",
--- }
---
--- ---@diagnostic disable-next-line: undefined-global
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
--- capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
---
--- for _, name in pairs(servers) do
---     local default_opts = {
---         on_attach = on_attach,
---         capabilities = capabilities,
---     }
---     local server_is_found, server = lsp_installer.get_server(name)
---     if server_is_found then
---         if not server:is_installed() then
---             print("Installing " .. name)
---             server:install()
---         end
---     if server.name == "tsserver" then
---       default_opts.displayPartsForJSDoc = true
---     end
---     lspconfig[server.name].setup(default_opts);
---     end
--- end
-
--- local eslint = {
---     lintCommand = "eslint_d -f visualstudio --stdin --stdin-filename ${INPUT}",
---     lintStdin = true,
---     lintFormats = { "%f(%l,%c): %tarning %m", "%f(%l,%c): %rror %m" },
---     lintIgnoreExitCode = true,
---     formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}",
---     formatStdin = true,
---     parseJson = {
---         errorsRoot = "[0].messages",
---         line = "line",
---         column = "column",
---         endLine = "endLine",
---         endColumn = "endColumn",
---         message = "[eslint] ${message} [${ruleId}]",
---         security = "severity",
---     },
---     securities = {
---         [2] = "error",
---         [1] = "warning",
---     },
--- }
---
--- local function eslint_config_exists()
---     local eslintrc = vim.fn.glob(".eslintrc*", 0, 1)
---
---     if not vim.tbl_isempty(eslintrc) then
---         return true
---     end
---
---     if vim.fn.filereadable("package.json") then
---         if
---             vim.fn.json_decode(vim.fn.readfile("package.json"))["eslintConfig"]
---         then
---             return true
---         end
---     end
---
---     return false
--- end
---
--- lspconfig.efm.setup({
---     on_attach = function(client)
---         client.resolved_capabilities.document_formatting = false
---         client.resolved_capabilities.goto_definition = false
---     end,
---     root_dir = function()
---         if not eslint_config_exists() then
---             return nil
---         end
---         return vim.fn.getcwd()
---     end,
---     settings = {
---         languages = {
---             javascript = { eslint },
---             javascriptreact = { eslint },
---             ["javascript.jsx"] = { eslint },
---             typescript = { eslint },
---             ["typescript.tsx"] = { eslint },
---             typescriptreact = { eslint },
---             lua = {
---                 { formatCommand = "lua-format -i", formatStdin = true },
---             },
---         },
---     },
---     filetypes = {
---         "javascript",
---         "javascriptreact",
---         "javascript.jsx",
---         "typescript",
---         "typescript.tsx",
---         "typescriptreact",
---     "lua"
---     },
--- })
+          diagnostics = {
+            globals = {
+              "vim",
+              "it",
+              "describe",
+              "before_each",
+              "after_each",
+            }
+          }
+        }
+      }
+    }
+  end,
+}

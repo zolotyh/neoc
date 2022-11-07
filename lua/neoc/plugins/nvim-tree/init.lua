@@ -7,16 +7,20 @@ require'nvim-tree'.setup {
   renderer = {
     highlight_git = true,
     highlight_opened_files = 'all',
-    special_files = {'README.md', 'Makefile', 'MAKEFILE', 'package.json'}
+    special_files = {'README.md', 'Makefile', 'MAKEFILE', 'package.json'},
+    indent_width = 2,
+    indent_markers = {
+      enable = true
+    }
   },
   git = {
-    enable = false,
+    enable = true,
     ignore = false,
     timeout = 400,
   },
   view = {
-    width = 60,
-    side = 'right',
+    width = 50,
+    side = 'left',
     mappings = {
       -- custom only false will merge the list with the default mappings
       -- if true, it will only use your list to set the mappings

@@ -23,17 +23,22 @@ return require("packer").startup(function(use)
   }) -- turn on theme
 
   -- Language servers config
+  use {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
+    "jose-elias-alvarez/null-ls.nvim" ,
+    "jayp0521/mason-null-ls.nvim",
+  }
+
   use({ "hrsh7th/nvim-cmp" }) -- Autocompletion plugin
   use({ "hrsh7th/cmp-nvim-lsp" }) -- LSP source for nvim-cmp
-  use({ "williamboman/nvim-lsp-installer" }) -- LSP source for nvim-cmp
   use({ "tami5/lspsaga.nvim" })
-  use({ "jose-elias-alvarez/null-ls.nvim" })
-  use("neovim/nvim-lspconfig")
 
   -- Special completions plugins
   use({ "hrsh7th/cmp-path" }) -- path completions
   use({ "hrsh7th/cmp-buffer" }) -- completion for words in buffer
-  use({ "hrsh7th/cmp-cmdline" }) -- complet
+  use({ "hrsh7th/cmp-cmdline" }) -- complete
   use({ "lukas-reineke/cmp-rg" }) -- rip grep completion
   use({ "onsails/lspkind-nvim" }) -- show pictagrams on autocompletion
 
@@ -154,6 +159,20 @@ return require("packer").startup(function(use)
     requires = { { "ray-x/guihua.lua" } },
     config = "require('neoc.plugins.sad')",
   })
+
+  use {
+    "klen/nvim-test",
+    config = function()
+      require('nvim-test').setup()
+    end
+  }
+  use 'jsgv/codeql.nvim'
+
+  use({
+    "shaunsingh/solarized.nvim",
+    config = "vim.cmd[[colorscheme solarized]]",
+  }) -- turn on theme
+
 
   -- use("neomake/neomake")
 end)
