@@ -61,7 +61,9 @@ return require("packer").startup(function(use)
     config = "require('neoc.plugins.gitsignsnvim')",
   })
   use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
-  use({ "rhysd/committia.vim" })
+
+  use 'rhysd/committia.vim'
+
   use({ "f-person/git-blame.nvim"})
   use({
     "TimUntersberger/neogit",
@@ -178,7 +180,7 @@ return require("packer").startup(function(use)
       vim.cmd[[colorscheme gruvbox]]
     end
   }) -- turn on theme
-
+  
 
   -- use("neomake/neomake")
 end)
