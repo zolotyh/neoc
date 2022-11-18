@@ -149,7 +149,7 @@ lspconfig.setup_handlers {
   end,
   ["sumneko_lua"] = function()
     require("lspconfig")["sumneko_lua"].setup {
-      settings = {
+        settings = {
         Lua = {
           diagnostics = {
             globals = {

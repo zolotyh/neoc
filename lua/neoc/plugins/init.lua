@@ -77,7 +77,10 @@ return require("packer").startup(function(use)
   })
   use({ "tpope/vim-repeat" })
   use({ "wakatime/vim-wakatime" })
-  use({ "pechorin/any-jump.vim" })
+
+  use({ "pechorin/any-jump.vim",
+    config = "require('neoc.plugins.anyjump')",
+  })
 
   -- Status line setup
   use({
@@ -180,7 +183,10 @@ return require("packer").startup(function(use)
       vim.cmd[[colorscheme gruvbox]]
     end
   }) -- turn on theme
-  
 
-  -- use("neomake/neomake")
+  use {
+    'akinsho/flutter-tools.nvim',
+    requires = 'nvim-lua/plenary.nvim',
+    config = "require('neoc.plugins.flutter-tools')",
+  }
 end)
