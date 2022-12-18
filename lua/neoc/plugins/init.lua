@@ -60,6 +60,13 @@ return require("packer").startup(function(use)
     requires = { "nvim-lua/plenary.nvim" },
     config = "require('neoc.plugins.gitsignsnvim')",
   })
+
+  use({
+    "folke/todo-comments.nvim",
+    requires = {"nvim-lua/plenary.nvim"},
+    config = "require('neoc.plugins.todocomments')",
+  })
+
   use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
 
   use 'rhysd/committia.vim'
@@ -174,9 +181,10 @@ return require("packer").startup(function(use)
       require('nvim-test').setup()
     end
   }
+
   use 'jsgv/codeql.nvim'
 
-  use({
+  use({ 
     "ellisonleao/gruvbox.nvim",
     config = function ()
       vim.o.background = 'light'

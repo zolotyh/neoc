@@ -29,6 +29,7 @@ opt.relativenumber = true
 opt.number = true
 opt.foldlevelstart=100
 opt.foldnestmax=2
+colorscheme='desert'
 
 -----------------------------------------------------------
 -- Fold
