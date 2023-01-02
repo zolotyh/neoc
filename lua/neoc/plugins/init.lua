@@ -80,13 +80,13 @@ return require("packer").startup(function(use)
 
   -- Add autopairs functionality
   use({ "windwp/nvim-autopairs",
-    config = "require('neoc.plugins.nvim-autopairs')",
-  })
-  use({ "tpope/vim-repeat" })
-  use({ "wakatime/vim-wakatime" })
+  config = "require('neoc.plugins.nvim-autopairs')",
+})
+use({ "tpope/vim-repeat" })
+use({ "wakatime/vim-wakatime" })
 
-  use({ "pechorin/any-jump.vim",
-    config = "require('neoc.plugins.anyjump')",
+use({ "pechorin/any-jump.vim",
+config = "require('neoc.plugins.anyjump')",
   })
 
   -- Status line setup
@@ -112,14 +112,29 @@ return require("packer").startup(function(use)
     ft = { "html", "tsx", "vue", "svelte", "php" },
   })
 
+
   -- Treesitter
   use({
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
     config = "require('neoc.plugins.nvim-treesitter')",
   })
+  use({
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    requires = {"nvim-treesitter/nvim-treesitter"},
+  })
   use({ "ray-x/cmp-treesitter" }) -- show node types in autocompletion
+
   use({ "theHamsta/nvim-treesitter-pairs", after = "nvim-treesitter" })
+
+  use({
+    "mfussenegger/nvim-treehopper",
+    requires = {
+      "phaazon/hop.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = "require('neoc.plugins.nvim-treesitter')",
+  })
   use({
     "nvim-treesitter/nvim-treesitter-refactor",
     after = "nvim-treesitter",
@@ -148,7 +163,7 @@ return require("packer").startup(function(use)
     requires = 'kevinhwang91/promise-async',
 
     config = function() require('ufo').setup()
-      end
+    end
   }
 
   use({
@@ -165,10 +180,10 @@ return require("packer").startup(function(use)
   use {
     "brymer-meneses/grammar-guard.nvim",
     requires = {
-        "neovim/nvim-lspconfig",
-        "williamboman/nvim-lsp-installer"
+      "neovim/nvim-lspconfig",
+      "williamboman/nvim-lsp-installer"
     }
-}
+  }
   use({
     "ray-x/sad.nvim",
     requires = { { "ray-x/guihua.lua" } },
@@ -184,7 +199,7 @@ return require("packer").startup(function(use)
 
   use 'jsgv/codeql.nvim'
 
-  use({ 
+  use({
     "ellisonleao/gruvbox.nvim",
     config = function ()
       vim.o.background = 'light'
@@ -197,4 +212,9 @@ return require("packer").startup(function(use)
     requires = 'nvim-lua/plenary.nvim',
     config = "require('neoc.plugins.flutter-tools')",
   }
+  use {
+    'stevearc/aerial.nvim',
+    config = "require('neoc.plugins.aerial')",
+  }
+  use 'kylechui/nvim-surround'
 end)

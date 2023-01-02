@@ -10,3 +10,6 @@ map("n", "s", "<cmd>lua require'hop'.hint_words()<cr>")
 map("n", "r", "<cmd>lua require'hop'.hint_lines()<cr>")
 map("v", "s", "<cmd>lua require'hop'.hint_words()<cr>")
 map("v", "r", "<cmd>lua require'hop'.hint_lines()<cr>")
+
+map('o','<silent> m', ':<C-U>lua require("tsht").nodes()<cr>')
+map('x','<silent> m', ':lua require("tsht").nodes()<cr>')
