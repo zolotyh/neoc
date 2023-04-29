@@ -47,3 +47,9 @@ local_options.shiftwidth = 2
 local_options.tabstop = 2
 local_options.makeprg='eslint_d --format unix --ext .ts,.tsx src/'
 local_options.errorformat='%f:%l:%c: %m,%-G%.%#'
+
+vim.cmd [[
+  augroup myfiletypes
+    autocmd BufNewFile,BufRead *.njk set filetype=html
+  augroup END
+]]
